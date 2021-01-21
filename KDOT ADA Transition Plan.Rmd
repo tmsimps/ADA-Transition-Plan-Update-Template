@@ -1,59 +1,94 @@
 ---
-title: "KDOT ADA Transition Plan"
-author: "Troy Martin Simpson"
-date: "1/20/2021"
-output: html_document
+title: "__Kane County ADA Transition Plan__"
+author: |
+  | __Credits__:
+  | Troy Simpson - Kane County Division of Transportation
+date: "__Updated:__ `r format(Sys.Date(), '%B %d, %Y')`"
+output: 
+  html_document:
+    theme: yeti
+    toc: true
+    number_sections: true
+    toc_float: true
 runtime: shiny
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This R Markdown document is made interactive using Shiny. Unlike the more traditional workflow of creating static reports, you can now create documents that allow your readers to change the assumptions underlying your analysis and see the results immediately. 
-
-To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
-
-## Inputs and Outputs
-
-You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change.  This demonstrates how a standard R plot can be made interactive by wrapping it in the Shiny `renderPlot` function. The `selectInput` and `sliderInput` functions create the input widgets used to drive the plot.
-
-```{r eruptions, echo=FALSE}
-inputPanel(
-  selectInput("n_breaks", label = "Number of bins:",
-              choices = c(10, 20, 35, 50), selected = 20),
-  
-  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
-              min = 0.2, max = 2, value = 1, step = 0.2)
-)
-
-renderPlot({
-  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
-       xlab = "Duration (minutes)", main = "Geyser eruption duration")
-  
-  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
-  lines(dens, col = "blue")
-})
+```{r libraries, include = FALSE}
+library(ymlthis)
+library(knitr)
+library(ggmap)
+library(shiny)
+library(tableHTML)
+library(prettydoc)
 ```
 
-## Embedded Application
+<style>
+h1.title {
+  text-align: center;
+}
+h1 {
+  color: #FFFFFF;
+  background-color: #479A39;
+}
+h4.author {
+  text-align: center;
+}
+h4.date {
+  text-align: center;
+}
+</style>
 
-It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+<center>
+![](http://kdot.countyofkane.org/SiteCollectionImages/KDOT-Logo.png)
+</center>
 
-```{r tabsets, echo=FALSE}
-shinyAppDir(
-  system.file("examples/06_tabsets", package = "shiny"),
-  options = list(
-    width = "100%", height = 550
-  )
-)
-```
+# Introduction
+***
+## Background
 
-Note the use of the `height` parameter to determine how much vertical space the embedded application should occupy.
+### The Americans with Disabilities Act
 
-You can also use the `shinyApp` function to define an application inline rather then in an external directory.
+The `Americans with Disabilities Act (ADA)` was signed into law on July 26, 1990, by President George H.W. Bush. The Act is a civil rights statute that prohibits discrimination against people who have disabilities. There are five separate Titles of the Act that relate to potential discrimination. `Title II` of the Act specifically addresses the topic of making sure public services and public transportation are accessible to those with disabilities. With the arrival of the Act, designing and constructing public facilities that are not accessible by people with disabilities constitutes discrimination.
 
-In all of R code chunks above the `echo = FALSE` attribute is used. This is to prevent the R code within the chunk from rendering in the document alongside the Shiny components.
+### ADA Accessibility Guidelines: Limitations for Transportation
+
+However, ADA standards for new construction and alterations were primarily developed for buildings and site work and were not easily applicable to sidewalks, street crossings, and related pedestrian facilities in the public right-of-way. Similarly, Section 504 standards did not offer guidance appropriate for right-of-way construction. The need to address right-of-way accessibility in a more specific way became apparent from the difficulties agencies had in applying `ADA Accessibility Guidelines (ADAAG)`. In 1999, the `United States Access Board`, the Federal Government’s specialist in accessible design, stated the rule making process for accessible pedestrian facilities in public right-of-way by convening a Federal advisory committee of key stakeholders to develop recommendations that could supplement or replace the current standard. `The Public Rights-Of-Way Access Advisory Committee (PROWAAC)` completed its initial work in 2000 and published its recommendations for new guidelines in a report to the `Transportation Research Board` in 2001.
+
+### Public Rights-of-Way Access Guidelines (PROWAG)
+
+In 2002, the Access Board issued a Notice of Availability of Draft `Public Rights-of-Way Accessibility Guidelines (PROWAG)` based on the PROWAAC report. Comments from consumers and design professionals led to the issuance of a second draft in 2005. A Notice of Proposed Rule Making (NPRM) seeking public comment prior to publication of a final rule was sent out in 2013. When standards consistent with the final PROWAG guidelines are adopted by the `Department of Justice` they will become the new minimum design standards under the ADA for both new construction and alterations. <span style="color:red;">Insert a section about Illinois Accessibility Code/IDOT Requirements for Public Agencies.</span>
+
+### Public Agency ADA Compliance: Maintenance vs. Alteration
+
+The Act applies to all public facilities built before and after the arrival of the Act. The ADA guidelines apply to newly constructed facilities and altered portions of existing facilities. However, the ADA guidelines only include existing facilities if the scope of the improvement includes alteration. *__Alteration__* includes reconstruction, rehabilitation, resurfacing, widening, and projects of similar scale and effect. *__Maintenance__* activity does not constitute an alteration under the ADA guidelines. _Below is a guide for determining if an activity triggers an ADA audit of the facilities_.
+
+
+
+## Applicability to the Kane County Division of Transportation
+## 7 Steps to ADA Compliance
+# Steps to ADA Compliance
+***
+## Designate an ADA Coordinator
+## Provide Notice to the Public about ADA Requirements
+## Establish a Grievance Procedure
+## Develop Internal Design Standards, Specifications, and Details
+## The ADA Transition Plan
+## Schedule and Budget for Improvements
+## Monitor the Progress on the Implementation of the Transition Plan
+# Conclusion
+***
+# Appendices
+***
+## Appendix A - Curb Ramp Inventory
+## Appendix B - Sidewalk/Trail Evaluation
+## Appendix C - Bus Shelter Inventory
+## Appendix D - KDOT Building ADA Assessment
+## Appendix E - Public Notice and Participation
+## Appendix F - Grievance Procedure
 
 
 
